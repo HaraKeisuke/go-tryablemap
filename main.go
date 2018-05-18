@@ -1,9 +1,9 @@
 package main
 
-import (
-	"fmt"
-)
-
 func main() {
-	fmt.Print("hoge")
+	// data := map[string]map[string]int{
+	// 	"first": map[string]int{},
+	// }
+
+	// fmt.Print("hoge")
 }
