@@ -1,6 +1,6 @@
 # Go TryableMap
 
-Tryable Map is safety dig tool for Map.
+Tryable Map is safety dig tool for Map(key/value).
 
 For example, you can chain like Ruby's try method and find the property.
 

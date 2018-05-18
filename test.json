@@ -1,0 +1,10 @@
+{
+  "first": {
+    "second": {
+      "hoge": "fuga",
+      "foo": {
+        "bar": "boo"
+      }
+    }
+  }
+}
