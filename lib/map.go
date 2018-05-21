@@ -74,23 +74,26 @@ func (tmap *TryableMap) TryArray(key string) *TryableArray {
 	return &TryableArray{}
 }
 
-// Warning.
-// func (tmap *TryableArray) Try(key int) *TryableMap {
-// 	if tmap.Array == nil {
-// 		return &TryableMap{}
-// 	}
-// 	array := makeArray(*tmap.Array)
-// 	if _val, ok := array[key].(map[string]interface{}); ok {
-// 		return &TryableMap{
-// 			Map: &_val,
-// 		}
-// 	}
-// 	return &TryableMap{}
-// }
+func (tmap *TryableArray) Try(key int) *TryableMap {
+	if tmap.Array == nil {
+		return &TryableMap{}
+	}
+	array := makeArray(*tmap.Array)
+	if _val, ok := array[key].(map[string]interface{}); ok {
+		return &TryableMap{
+			Map: &_val,
+		}
+	}
+	return &TryableMap{}
+}
 
-// 多次元配列
 func (tmap *TryableArray) TryArray(key int) *TryableArray {
 	if tmap.Array == nil {
+		return &TryableArray{}
+	}
+
+	maxLen := len(*tmap.Array)
+	if maxLen <= key {
 		return &TryableArray{}
 	}
 
@@ -122,7 +125,7 @@ func (tmap *TryableArray) Value(key int) interface{} {
 		return nil
 	}
 	maxLen := len(*tmap.Array)
-	if maxLen < key {
+	if maxLen <= key {
 		return nil
 	}
 

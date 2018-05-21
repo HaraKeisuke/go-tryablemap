@@ -32,7 +32,15 @@ func main() {
 		[]int{1, 2, 3}, []int{4, 5, 6}, []int{7, 8, 9},
 	}
 	_map3 := tryablemap.NewTryableArray(data3)
-	result4 := _map3.TryArray(0).Value(2)
+	result3 := _map3.TryArray(0).Value(2)
+
+	fmt.Println(result3)
+
+	data4 := map[string]interface{}{
+		"hoge": []map[string]interface{}{{"first": 1}, {"second": 2}, {"third": 3}},
+	}
+	_map4 := tryablemap.NewTryableMap(data4)
+	result4 := _map4.TryArray("hoge").Try(0).Value("first")
 
 	fmt.Println(result4)
 }
