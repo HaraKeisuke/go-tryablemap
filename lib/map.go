@@ -30,9 +30,10 @@ func NewTryableMap(_map interface{}) *TryableMap {
 	return &TryableMap{}
 }
 
-func NewTryableArray(_array []interface{}) *TryableArray {
+func NewTryableArray(_array interface{}) *TryableArray {
+	array := makeArray(_array)
 	return &TryableArray{
-		Array: &_array,
+		Array: &array,
 	}
 }
 
@@ -73,29 +74,35 @@ func (tmap *TryableMap) TryArray(key string) *TryableArray {
 	return &TryableArray{}
 }
 
-func (tmap *TryableArray) Try(key int) *TryableMap {
-	if tmap.Array == nil {
-		return &TryableMap{}
-	}
-	if _val, ok := (*tmap.Array)[key].(map[string]interface{}); ok {
-		return &TryableMap{
-			Map: &_val,
-		}
-	}
-	return &TryableMap{}
-}
+// Warning.
+// func (tmap *TryableArray) Try(key int) *TryableMap {
+// 	if tmap.Array == nil {
+// 		return &TryableMap{}
+// 	}
+// 	array := makeArray(*tmap.Array)
+// 	if _val, ok := array[key].(map[string]interface{}); ok {
+// 		return &TryableMap{
+// 			Map: &_val,
+// 		}
+// 	}
+// 	return &TryableMap{}
+// }
 
 // 多次元配列
 func (tmap *TryableArray) TryArray(key int) *TryableArray {
 	if tmap.Array == nil {
 		return &TryableArray{}
 	}
-	if _val, ok := (*tmap.Array)[key].([]interface{}); ok {
-		return &TryableArray{
-			Array: &_val,
-		}
+
+	val := (*tmap.Array)[key]
+	if val == nil {
+		return &TryableArray{}
 	}
-	return &TryableArray{}
+
+	array := makeArray(val)
+	return &TryableArray{
+		Array: &array,
+	}
 }
 
 func (tmap *TryableMap) Value(key string) interface{} {
@@ -114,7 +121,6 @@ func (tmap *TryableArray) Value(key int) interface{} {
 	if tmap.Array == nil {
 		return nil
 	}
-
 	maxLen := len(*tmap.Array)
 	if maxLen < key {
 		return nil

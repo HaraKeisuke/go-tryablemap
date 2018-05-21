@@ -15,25 +15,35 @@ import (
 )
 
 func main() {
-  sample := map[string]interface{}{
-    "first": map[string]interface{}{
-      "second": 123,
-    },
-  }
-  _map := tryablemap.NewTryableMap(sample)
-  result := _map.Try("first").Value("second")
+	data := map[string]interface{}{
+	  "first": map[string]int{
+            "second": 123,
+	  },
+        }
+	_map := tryablemap.NewTryableMap(data)
+	result := _map.Try("first").Value("second")
 
-  fmt.Print(result) //-> 123
+	fmt.Println(result)
 
-  data2 := map[string][]interface{}{
-    "sample": []interface{}{
-    "first", "second", "third",
-    },
-  }
-  _map2 := tryablemap.NewTryableArray(data2)
-  result2 := _map2.Try("sample").Value(0)
+	data2 := map[string][]string{
+	  "sample": []string{
+	    "first", "second", "third",
+	  },
+	}
 
-  fmt.Println(result2) //-> first
+	_map2 := tryablemap.NewTryableMap(data2)
+	result2 := _map2.TryArray("sample").Value(0)
+
+	fmt.Println(result2)
+
+
+	data3 := [][]int{
+	  []int{1, 2, 3}, []int{4, 5, 6}, []int{7, 8, 9},
+	}
+	_map3 := tryablemap.NewTryableArray(data3)
+	result4 := _map3.TryArray(0).Value(2)
+
+	fmt.Println(result4)
 }
 ```
 

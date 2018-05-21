@@ -27,4 +27,12 @@ func main() {
 	result2 := _map2.TryArray("sample").Value(0)
 
 	fmt.Println(result2)
+
+	data3 := [][]int{
+		[]int{1, 2, 3}, []int{4, 5, 6}, []int{7, 8, 9},
+	}
+	_map3 := tryablemap.NewTryableArray(data3)
+	result4 := _map3.TryArray(0).Value(2)
+
+	fmt.Println(result4)
 }
