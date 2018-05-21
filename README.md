@@ -37,6 +37,10 @@ func main() {
 }
 ```
 
+### Todo
+- [ ] Convert TryableArray to TryableMap
+- [ ] Convert TryableMap to TryableArray
+
 ### Finally
 
 Please tell me if there is a better way :)
