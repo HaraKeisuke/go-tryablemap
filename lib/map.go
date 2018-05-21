@@ -42,6 +42,10 @@ func (tmap *TryableMap) Try(key string) *TryableMap {
 	}
 
 	val := (*tmap.Map)[key]
+	if val == nil {
+		return &TryableMap{}
+	}
+
 	hash := makeMap(val)
 	if _val, ok := (*hash).(map[string]interface{}); ok {
 		return &TryableMap{
@@ -57,6 +61,10 @@ func (tmap *TryableMap) TryArray(key string) *TryableArray {
 	}
 
 	val := (*tmap.Map)[key]
+	if val == nil {
+		return &TryableArray{}
+	}
+
 	array := makeArray(val)
 
 	return &TryableArray{
@@ -138,7 +146,7 @@ func makeArray(object interface{}) []interface{} {
 		v := reflect.ValueOf(object)
 		array := make([]interface{}, v.Len())
 		for i := 0; i < v.Len(); i++ {
-			array[i] = v.Index(i)
+			array[i] = v.Index(i).Interface()
 		}
 		return array
 	}

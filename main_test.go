@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"testing"
 
 	"github.com/HaraKeisuke/go-tryablemap/lib"
@@ -15,6 +16,7 @@ func TestTryableMap(t *testing.T) {
 			},
 		},
 	}
+
 	tryable := tryablemap.NewTryableMap(data)
 	second := tryable.Try("first").Value("second")
 	if second != 123 {
@@ -43,18 +45,19 @@ func TestTryableArray(t *testing.T) {
 			"first", "second", "third",
 		},
 	}
-	tryable := tryablemap.NewTryableArray(data)
-	first := tryable.Try("sample").Value(0)
+	tryable := tryablemap.NewTryableMap(data)
+	first := tryable.TryArray("sample").Value(0)
+	fmt.Print(first)
 	if first != "first" {
-		t.Errorf("Second is not invalid")
+		t.Errorf("First is not invalid")
 	}
 
-	second := tryable.Try("sample").Value(1)
+	second := tryable.TryArray("sample").Value(1)
 	if second != "second" {
 		t.Errorf("Second is not invalid")
 	}
 
-	outOfRange := tryable.Try("sample").Value(5)
+	outOfRange := tryable.TryArray("sample").Value(5)
 	if outOfRange != nil {
 		t.Errorf("OutOfRange is danger. It may happen panic.")
 	}
