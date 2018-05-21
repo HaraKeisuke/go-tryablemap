@@ -35,5 +35,27 @@ func TestTryableMap(t *testing.T) {
 	if invalidKey2 != nil {
 		t.Errorf("invalid key is not work")
 	}
+}
 
+func TestTryableArray(t *testing.T) {
+	data := map[string][]interface{}{
+		"sample": []interface{}{
+			"first", "second", "third",
+		},
+	}
+	tryable := tryablemap.NewTryableArray(data)
+	first := tryable.Try("sample").Value(0)
+	if first != "first" {
+		t.Errorf("Second is not invalid")
+	}
+
+	second := tryable.Try("sample").Value(1)
+	if second != "second" {
+		t.Errorf("Second is not invalid")
+	}
+
+	outOfRange := tryable.Try("sample").Value(5)
+	if outOfRange != nil {
+		t.Errorf("OutOfRange is danger. It may happen panic.")
+	}
 }
