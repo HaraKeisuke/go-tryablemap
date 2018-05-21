@@ -5,6 +5,7 @@ Tryable Map is safety dig tool for Map(key/value) and Array.
 For example, you can chain like Ruby's try method and find the property.
 
 ### How to use
+
 ```
 package main
 
@@ -25,16 +26,17 @@ func main() {
   fmt.Print(result) //-> 123
 
   data2 := map[string][]interface{}{
-		"sample": []interface{}{
-			"first", "second", "third",
-		},
-	}
-	_map2 := tryablemap.NewTryableArray(data2)
-	result2 := _map2.Try("sample").Value(0)
+    "sample": []interface{}{
+    "first", "second", "third",
+    },
+  }
+  _map2 := tryablemap.NewTryableArray(data2)
+  result2 := _map2.Try("sample").Value(0)
 
-	fmt.Println(result2) //-> first
+  fmt.Println(result2) //-> first
 }
 ```
 
 ### Finally
+
 Please tell me if there is a better way :)
