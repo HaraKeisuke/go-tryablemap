@@ -8,7 +8,7 @@ import (
 
 func main() {
 	data := map[string]interface{}{
-		"first": map[string]interface{}{
+		"first": map[string]int{
 			"second": 123,
 		},
 	}
@@ -17,13 +17,14 @@ func main() {
 
 	fmt.Println(result)
 
-	data2 := map[string][]interface{}{
-		"sample": []interface{}{
+	data2 := map[string][]string{
+		"sample": []string{
 			"first", "second", "third",
 		},
 	}
-	_map2 := tryablemap.NewTryableArray(data2)
-	result2 := _map2.Try("sample").Value(0)
+
+	_map2 := tryablemap.NewTryableMap(data2)
+	result2 := _map2.TryArray("sample").Value(0)
 
 	fmt.Println(result2)
 }
