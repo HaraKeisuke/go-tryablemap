@@ -17,7 +17,7 @@ func TestTryableMap(t *testing.T) {
 		},
 	}
 
-	tryable := tryablemap.NewTryableMap(data)
+	tryable := tryablemap.New(data)
 	second := tryable.Try("first").Value("second")
 	if second != 123 {
 		t.Errorf("Second is not invalid")
@@ -45,7 +45,7 @@ func TestTryableArray(t *testing.T) {
 			"first", "second", "third",
 		},
 	}
-	tryable := tryablemap.NewTryableMap(data)
+	tryable := tryablemap.New(data)
 	first := tryable.TryArray("sample").Value(0)
 	fmt.Print(first)
 	if first != "first" {
